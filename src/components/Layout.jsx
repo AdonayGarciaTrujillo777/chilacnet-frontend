@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { Outlet, Link, useNavigate, useLocation } from 'react-router-dom';
+import logo from '../assets/logoC.png'; // <--- IMPORTACIÓN DEL LOGO
 
 function Layout() {
   const navigate = useNavigate();
   const location = useLocation();
   const usuarioGuardado = JSON.parse(localStorage.getItem('usuario'));
   
-  // NUEVO: Estado para controlar el menú en celulares
+  // Estado para controlar el menú en celulares
   const [menuAbierto, setMenuAbierto] = useState(false);
 
   const cerrarSesion = () => {
@@ -19,13 +20,12 @@ function Layout() {
     return paths.some(path => location.pathname.includes(path));
   };
 
-  // Función para que el menú se cierre solito en celular al elegir una opción
   const cerrarMenuMobile = () => setMenuAbierto(false);
 
   return (
     <div className="flex h-screen bg-gray-50 font-sans overflow-hidden">
       
-      {/* NUEVO: OVERLAY OSCURO PARA MÓVILES (Fondo semitransparente al abrir el menú) */}
+      {/* OVERLAY OSCURO PARA MÓVILES */}
       {menuAbierto && (
         <div 
           className="fixed inset-0 bg-black/50 z-40 md:hidden transition-opacity"
@@ -33,17 +33,23 @@ function Layout() {
         ></div>
       )}
 
-      {/* SIDEBAR (Ahora es responsivo: se esconde en móvil y se fija en PC) */}
+      {/* SIDEBAR */}
       <aside className={`fixed inset-y-0 left-0 z-50 w-64 bg-white border-r border-gray-200 flex flex-col shadow-sm transition-transform duration-300 ease-in-out md:relative md:translate-x-0 ${menuAbierto ? 'translate-x-0' : '-translate-x-full'}`}>
         
-        {/* LOGO DE LA EMPRESA */}
-        <div className="h-20 flex justify-between items-center px-6 border-b border-gray-100">
-          <div className="flex flex-col justify-center">
-            <h1 className="text-3xl font-extrabold text-blue-600 tracking-tight">Chilacnet</h1>
-            <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1">
+        {/* --- LOGO EN EL SIDEBAR (Versión Escritorio/Menú Abierto) --- */}
+        <div className="h-24 flex justify-between items-center px-6 border-b border-gray-100">
+          <div className="flex flex-col justify-center w-full">
+            {/* Imagen del Logo */}
+            <img 
+              src={logo} 
+              alt="Chilacnet" 
+              className="h-12 w-auto object-contain mb-1 self-start" 
+            />
+            <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest pl-1">
               Panel {usuarioGuardado?.rol}
             </span>
           </div>
+          
           {/* Botón X para cerrar en móvil */}
           <button onClick={() => setMenuAbierto(false)} className="md:hidden text-gray-500 hover:text-gray-700">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
@@ -81,7 +87,7 @@ function Layout() {
           )}
         </nav>
 
-        {/* PERFIL DE USUARIO Y BOTÓN DE SALIR */}
+        {/* PERFIL DE USUARIO */}
         <div className="p-4 border-t border-gray-100 bg-gray-50/50">
           <div className="flex items-center gap-3 px-4 py-3 mb-3 bg-white border border-gray-200 rounded-xl shadow-sm">
             <div className="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-sm shadow-inner shrink-0">
@@ -103,13 +109,18 @@ function Layout() {
         </div>
       </aside>
 
-      {/* COLUMNA DERECHA (Barra superior móvil + Contenido) */}
+      {/* COLUMNA DERECHA */}
       <div className="flex-1 flex flex-col h-screen overflow-hidden">
         
-        {/* NUEVO: HEADER MÓVIL (Solo aparece en celulares) */}
+        {/* --- HEADER MÓVIL (Solo celulares) --- */}
         <header className="md:hidden bg-white border-b border-gray-200 h-16 flex items-center justify-between px-4 shrink-0 z-30 shadow-sm">
-          <h1 className="text-xl font-extrabold text-blue-600 tracking-tight">Chilacnet</h1>
-          {/* Botón de Hamburguesa */}
+          {/* Logo en versión Móvil */}
+          <img 
+            src={logo} 
+            alt="Chilacnet" 
+            className="h-10 w-auto object-contain" 
+          />
+          
           <button 
             onClick={() => setMenuAbierto(true)}
             className="p-2 text-gray-600 hover:bg-gray-100 rounded-lg focus:outline-none"
