@@ -28,7 +28,7 @@ function NuevoEmpleado() {
     try {
       const token = localStorage.getItem('token');
       // Asegúrate de que esta URL sea la que usas en tu proyecto
-      const respuesta = await fetch('http://localhost:3000/api/auth/registrar', {
+      const respuesta = await fetch('https://chilacnet-backend.onrender.com/api/auth/registrar', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

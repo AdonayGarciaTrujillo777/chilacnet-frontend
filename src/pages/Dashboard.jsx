@@ -21,7 +21,7 @@ function Dashboard() {
           return;
         }
 
-        const respuesta = await fetch('http://localhost:3000/api/clientes', {
+        const respuesta = await fetch('https://chilacnet-backend.onrender.com/api/clientes', {
           method: 'GET',
           headers: { 'Authorization': `Bearer ${token}` }
         });

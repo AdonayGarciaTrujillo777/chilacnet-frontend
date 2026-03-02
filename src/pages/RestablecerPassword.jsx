@@ -39,7 +39,7 @@ function RestablecerPassword() {
     setCargando(true);
     try {
       // Mandamos la nueva contraseña y el token al backend
-      const respuesta = await fetch(`http://localhost:3000/api/auth/restablecer-password/${token}`, {
+      const respuesta = await fetch(`https://chilacnet-backend.onrender.com/api/auth/restablecer-password/${token}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ nuevaPassword: password })

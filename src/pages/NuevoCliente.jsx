@@ -28,7 +28,7 @@ function NuevoCliente() {
 
     try {
       const token = localStorage.getItem('token');
-      const respuesta = await fetch('http://localhost:3000/api/clientes', {
+      const respuesta = await fetch('https://chilacnet-backend.onrender.com/api/clientes', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

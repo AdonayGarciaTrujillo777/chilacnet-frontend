@@ -73,7 +73,7 @@ function Instalacion() {
         const formData = new FormData();
         formData.append('foto', fotoArchivo); // 'foto' es el nombre que espera multer en el backend
 
-        const uploadRes = await fetch('http://localhost:3000/api/upload', {
+        const uploadRes = await fetch('https://chilacnet-backend.onrender.com/api/upload', {
           method: 'POST',
           headers: {
             'Authorization': `Bearer ${token}`
@@ -96,7 +96,7 @@ function Instalacion() {
         foto_domicilio_url: urlFotoFinal
       };
 
-      const respuesta = await fetch(`http://localhost:3000/api/clientes/${clienteSeleccionado.id}`, {
+      const respuesta = await fetch(`https://chilacnet-backend.onrender.com/api/clientes/${clienteSeleccionado.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

@@ -27,7 +27,7 @@ function Personal() {
     const obtenerPersonal = async () => {
       try {
         const token = localStorage.getItem('token');
-        const respuesta = await fetch('http://localhost:3000/api/auth/personal', {
+        const respuesta = await fetch('https://chilacnet-backend.onrender.com/api/auth/personal', {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         
@@ -65,7 +65,7 @@ function Personal() {
 
     try {
       const token = localStorage.getItem('token');
-      const respuesta = await fetch(`http://localhost:3000/api/auth/personal/${id}`, {
+      const respuesta = await fetch(`https://chilacnet-backend.onrender.com/api/auth/personal/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });

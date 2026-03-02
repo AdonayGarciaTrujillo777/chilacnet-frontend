@@ -13,7 +13,7 @@ function OlvidePassword() {
 
     setCargando(true);
     try {
-      const respuesta = await fetch('http://localhost:3000/api/auth/olvide-password', {
+      const respuesta = await fetch('https://chilacnet-backend.onrender.com/api/auth/olvide-password', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ correo })

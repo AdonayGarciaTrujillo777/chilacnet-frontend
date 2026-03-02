@@ -72,7 +72,7 @@ function DetallesCliente() {
         const formData = new FormData();
         formData.append('foto', fotoArchivo);
 
-        const uploadRes = await fetch('http://localhost:3000/api/upload', {
+        const uploadRes = await fetch('https://chilacnet-backend.onrender.com/api/upload', {
           method: 'POST',
           headers: { 'Authorization': `Bearer ${token}` },
           body: formData
@@ -89,7 +89,7 @@ function DetallesCliente() {
         foto_domicilio_url: urlFotoFinal
       };
 
-      const respuesta = await fetch(`http://localhost:3000/api/clientes/${cliente.id}`, {
+      const respuesta = await fetch(`https://chilacnet-backend.onrender.com/api/clientes/${cliente.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
