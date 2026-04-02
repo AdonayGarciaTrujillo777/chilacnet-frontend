@@ -53,7 +53,7 @@ function NuevoCliente() {
       navigate('/dashboard');
 
     } catch (err) {
-      // NUEVA ALERTA ELEGANTE DE ERROR
+      
       Swal.fire({
         icon: 'error',
         title: 'Error al guardar',

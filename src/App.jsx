@@ -1,9 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
-// Importación del Layout
 import Layout from './components/Layout';
 
-// Importación de Páginas
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import NuevoCliente from './pages/NuevoCliente';
@@ -18,12 +16,10 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Ruta pública sin menú: Login */}
         <Route path="/" element={<Login />} />
         <Route path="/olvide-password" element={<OlvidePassword />} />
         <Route path="/restablecer-password/:token" element={<RestablecerPassword />} />
         
-        {/* RUTAS PROTEGIDAS ADENTRO DEL MENÚ LATERAL */}
         <Route element={<Layout />}>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/nuevo-cliente" element={<NuevoCliente />} />
@@ -34,7 +30,7 @@ function App() {
           
         </Route>
         
-        {/* Ruta comodín */}
+        
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </BrowserRouter>

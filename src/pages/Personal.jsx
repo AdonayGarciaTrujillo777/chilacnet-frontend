@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Swal from 'sweetalert2'; // <-- NUEVA IMPORTACIÓN
+import Swal from 'sweetalert2';
 
 function Personal() {
   const navigate = useNavigate();
@@ -12,7 +12,7 @@ function Personal() {
 
   useEffect(() => {
     if (!esAdmin) {
-      // Alerta elegante de error
+      
       Swal.fire({
         icon: 'error',
         title: 'Acceso Denegado',
@@ -58,7 +58,7 @@ function Personal() {
       cancelButtonColor: '#6b7280',
       confirmButtonText: 'Sí, eliminar',
       cancelButtonText: 'Cancelar',
-      reverseButtons: true // Pone el botón de cancelar a la izquierda (mejor UX)
+      reverseButtons: true 
     });
 
     if (!resultado.isConfirmed) return;
@@ -72,13 +72,13 @@ function Personal() {
 
       if (respuesta.ok) {
         setEmpleados(empleados.filter(emp => emp.id !== id));
-        // Alerta de éxito
+        
         Swal.fire({
           icon: 'success',
           title: '¡Eliminado!',
           text: `El acceso de ${nombre} ha sido revocado.`,
           showConfirmButton: false,
-          timer: 2000 // Se cierra solita en 2 segundos
+          timer: 2000 
         });
       } else {
         Swal.fire('Error', 'Hubo un problema al eliminar el empleado.', 'error');

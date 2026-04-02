@@ -51,7 +51,7 @@ function Login() {
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
       <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md">
         
-        {/* --- SECCIÓN DEL LOGO MODIFICADA --- */}
+        
         <div className="text-center mb-8">
           <div className="flex justify-center mb-4">
             <img 
@@ -60,14 +60,12 @@ function Login() {
               className="h-28 w-auto object-contain" 
             />
           </div>
-          {/* Si quieres dejar el nombre escrito abajo del logo, descomenta la siguiente línea: */}
-          {/* <h1 className="text-2xl font-bold text-blue-800">Chilacnet</h1> */}
-          
+        
           <p className="text-gray-500 mt-2 text-sm uppercase tracking-wide font-semibold">
             Panel de Administración
           </p>
         </div>
-        {/* ----------------------------------- */}
+        
         
         {errorMensaje && (
           <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6 rounded">

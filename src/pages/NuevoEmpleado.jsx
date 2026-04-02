@@ -27,7 +27,7 @@ function NuevoEmpleado() {
 
     try {
       const token = localStorage.getItem('token');
-      // Asegúrate de que esta URL sea la que usas en tu proyecto
+      
       const respuesta = await fetch('https://chilacnet-backend.onrender.com/api/auth/registrar', {
         method: 'POST',
         headers: {
@@ -41,7 +41,7 @@ function NuevoEmpleado() {
 
       if (!respuesta.ok) throw new Error(datos.error || 'Error al registrar al empleado');
 
-      // ¡NUEVA ALERTA ELEGANTE DE ÉXITO!
+      
       await Swal.fire({
         icon: 'success',
         title: '¡Personal registrado!',
@@ -53,7 +53,7 @@ function NuevoEmpleado() {
       navigate('/personal');
 
     } catch (err) {
-      // NUEVA ALERTA ELEGANTE DE ERROR
+      
       Swal.fire({
         icon: 'error',
         title: 'No se pudo registrar',
@@ -83,7 +83,7 @@ function NuevoEmpleado() {
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Correo Electrónico</label>
-              {/* Aquí puedes ver que no hay ningún límite de longitud */}
+              
               <input type="email" name="correo" value={empleado.correo} onChange={handleChange} className="w-full px-4 py-2 border rounded-lg" required />
             </div>
           </div>
@@ -106,7 +106,7 @@ function NuevoEmpleado() {
             </div>
           </div>
 
-          {/* Aquí está el campo del RFC que pediste */}
+          
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">RFC</label>

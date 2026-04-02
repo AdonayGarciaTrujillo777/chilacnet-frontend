@@ -9,7 +9,7 @@ function Dashboard() {
   const [error, setError] = useState('');
   const [busqueda, setBusqueda] = useState('');
   
-  // NUEVO: Estado para saber qué filtro está activo (por defecto mostramos 'todos')
+  
   const [filtroEstado, setFiltroEstado] = useState('todos');
 
   useEffect(() => {
@@ -40,37 +40,33 @@ function Dashboard() {
     obtenerClientes();
   }, [navigate]);
 
-  // 1. Le damos una calificación/prioridad a cada estado
+    
+
   const prioridadEstados = {
-    'en espera': 1, // Prioridad Máxima (Aparecen primero)
+    'en espera': 1, 
     'activo': 2,
     'suspendido': 3,
-    'cancelado': 4  // Prioridad Mínima (Aparecen al final)
+    'cancelado': 4  
   };
 
-  // 2. Filtramos combinando el Buscador de texto + Los botones de estado
   const clientesFiltrados = clientes
     .filter(cliente => {
-      // Condición 1: ¿Coincide con el texto escrito?
       const termino = busqueda.toLowerCase();
       const coincideNombre = cliente.nombre_completo.toLowerCase().includes(termino);
       const fecha = new Date(cliente.fecha_creacion).toISOString().split('T')[0];
       const coincideFecha = fecha.includes(termino);
       const pasaBusqueda = coincideNombre || coincideFecha;
 
-      // Condición 2: ¿Coincide con el botón de filtro seleccionado?
       const pasaEstado = filtroEstado === 'todos' || cliente.estado?.toLowerCase() === filtroEstado;
 
       return pasaBusqueda && pasaEstado;
     })
     .sort((a, b) => {
-      // Ordenamos por prioridad
       const pesoA = prioridadEstados[a.estado?.toLowerCase()] || 5;
       const pesoB = prioridadEstados[b.estado?.toLowerCase()] || 5;
       return pesoA - pesoB;
     });
 
-  // Función para darle color al botón activo dependiendo de qué estado sea
   const obtenerClaseBotonFiltro = (estado) => {
     const claseBase = "px-4 py-1.5 text-xs font-bold rounded-full capitalize border transition-all duration-200 shadow-sm whitespace-nowrap ";
     
@@ -92,7 +88,6 @@ function Dashboard() {
     <div className="p-8">
       <div className="max-w-7xl mx-auto">
         
-        {/* ENCABEZADO PRINCIPAL */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
           <div>
             <h1 className="text-2xl font-bold text-gray-800">Directorio de Clientes</h1>
@@ -119,7 +114,6 @@ function Dashboard() {
           </div>
         </div>
 
-        {/* NUEVO: BOTONES DE FILTROS RÁPIDOS */}
         <div className="flex flex-wrap gap-2 mb-8 items-center bg-white p-3 rounded-xl border border-gray-100 shadow-sm">
           <span className="text-sm font-semibold text-gray-500 mr-2 ml-1">Filtros:</span>
           {['todos', 'en espera', 'activo', 'suspendido', 'cancelado'].map((estado) => (
@@ -132,8 +126,7 @@ function Dashboard() {
             </button>
           ))}
         </div>
-
-        {/* ÁREA DE TARJETAS */}
+          
         <div className="bg-transparent">
           {cargando && <p className="text-gray-500 text-center py-4">Cargando clientes...</p>}
           {error && <p className="text-red-500 text-center py-4">{error}</p>}

@@ -8,13 +8,12 @@ function RestablecerPassword() {
   const [cargando, setCargando] = useState(false);
   
   const navigate = useNavigate();
-  // useParams atrapa el "código secreto" que viene en el enlace del correo
+
   const { token } = useParams(); 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validación 1: Que las contraseñas coincidan
     if (password !== confirmarPassword) {
       Swal.fire({
         icon: 'error',
@@ -25,7 +24,6 @@ function RestablecerPassword() {
       return;
     }
 
-    // Validación 2: Que sea un poco segura
     if (password.length < 6) {
       Swal.fire({
         icon: 'warning',
@@ -38,7 +36,7 @@ function RestablecerPassword() {
 
     setCargando(true);
     try {
-      // Mandamos la nueva contraseña y el token al backend
+      
       const respuesta = await fetch(`https://chilacnet-backend.onrender.com/api/auth/restablecer-password/${token}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -49,7 +47,7 @@ function RestablecerPassword() {
 
       if (!respuesta.ok) throw new Error(datos.error || 'Error al procesar la solicitud');
 
-      // ¡Alerta elegante de éxito!
+      
       await Swal.fire({
         icon: 'success',
         title: '¡Contraseña actualizada!',
@@ -57,7 +55,7 @@ function RestablecerPassword() {
         confirmButtonColor: '#16a34a'
       });
 
-      // Lo regresamos al Login
+      
       navigate('/'); 
 
     } catch (error) {

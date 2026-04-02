@@ -23,7 +23,7 @@ function OlvidePassword() {
 
       if (!respuesta.ok) throw new Error(datos.error || 'Error al procesar la solicitud');
 
-      // ¡Alerta elegante de éxito!
+     
       await Swal.fire({
         icon: 'success',
         title: '¡Correo enviado!',
@@ -32,7 +32,7 @@ function OlvidePassword() {
         confirmButtonText: 'Entendido'
       });
 
-      // Lo regresamos al login para que espere su correo
+      
       navigate('/'); 
 
     } catch (error) {

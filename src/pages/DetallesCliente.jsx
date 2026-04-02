@@ -15,7 +15,7 @@ function DetallesCliente() {
   // Estados para manejar las fotos
   const [fotoArchivo, setFotoArchivo] = useState(null);
   const [vistaPrevia, setVistaPrevia] = useState(null);
-  const [quitarFoto, setQuitarFoto] = useState(false); // NUEVO: Para saber si el usuario quiere borrar la foto actual
+  const [quitarFoto, setQuitarFoto] = useState(false); /
 
   useEffect(() => {
     if (!clienteSeleccionado) {
@@ -34,11 +34,11 @@ function DetallesCliente() {
     if (file) {
       setFotoArchivo(file);
       setVistaPrevia(URL.createObjectURL(file));
-      setQuitarFoto(false); // Si elige una foto nueva, cancelamos la orden de "quitar foto"
+      setQuitarFoto(false);
     }
   };
 
-  // NUEVO: Función para ver la foto en grande usando SweetAlert2
+  // Función para ver la foto en grande usando SweetAlert2
   const verFotoEnGrande = (url) => {
     if (!url) return;
     Swal.fire({
@@ -49,7 +49,7 @@ function DetallesCliente() {
       width: 'auto',
       padding: '1em',
       background: '#fff',
-      backdrop: `rgba(0,0,0,0.8)` // Fondo oscuro elegante
+      backdrop: `rgba(0,0,0,0.8)` 
     });
   };
 
@@ -100,7 +100,7 @@ function DetallesCliente() {
 
       if (!respuesta.ok) throw new Error('Error al actualizar el cliente');
 
-      // Actualizamos todo a la normalidad
+      
       setCliente(datosParaGuardar);
       setModoEdicion(false);
       setFotoArchivo(null);
@@ -253,8 +253,7 @@ function DetallesCliente() {
 
           <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 flex flex-col">
             <h2 className="text-lg font-bold border-b pb-2 mb-4">Evidencia Fotográfica</h2>
-            
-            {/* Contenedor de la Imagen */}
+          
             <div className="flex-1 border-2 border-dashed border-gray-200 rounded-lg flex flex-col items-center justify-center bg-gray-50 overflow-hidden min-h-[250px] relative group">
               
               {urlAMostrar ? (
@@ -266,7 +265,6 @@ function DetallesCliente() {
                     onClick={() => verFotoEnGrande(urlAMostrar)}
                     title="Clic para ver en grande"
                   />
-                  {/* Botón flotante para ver en grande (aparece al pasar el ratón) */}
                   <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
                     <span className="bg-black/50 text-white px-3 py-1 rounded-full text-sm backdrop-blur-sm">🔍 Ver en grande</span>
                   </div>
@@ -280,11 +278,9 @@ function DetallesCliente() {
 
             </div>
 
-            {/* Controles de Edición de Foto */}
             {modoEdicion && (
               <div className="mt-4 space-y-3">
                 
-                {/* Botón rojo para eliminar la foto actual */}
                 {urlAMostrar && (
                   <button 
                     type="button"

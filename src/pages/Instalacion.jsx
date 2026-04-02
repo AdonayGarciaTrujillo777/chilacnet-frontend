@@ -10,7 +10,6 @@ function Instalacion() {
   const [error, setError] = useState('');
   const [cargando, setCargando] = useState(false);
   
-  // NUEVO: Estados para manejar el archivo físico y su vista previa
   const [fotoArchivo, setFotoArchivo] = useState(null);
   const [vistaPrevia, setVistaPrevia] = useState(null);
 
@@ -37,12 +36,10 @@ function Instalacion() {
     setDatosInstalacion({ ...datosInstalacion, [e.target.name]: e.target.value });
   };
 
-  // NUEVO: Función para manejar cuando el usuario selecciona una imagen
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
       setFotoArchivo(file);
-      // Creamos una URL temporal para que el usuario vea la foto que eligió
       setVistaPrevia(URL.createObjectURL(file));
     }
   };
@@ -50,7 +47,6 @@ function Instalacion() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    // Validación: Obligar a subir la foto
     if (!fotoArchivo && !datosInstalacion.foto_domicilio_url) {
       Swal.fire({
         icon: 'warning',
@@ -68,16 +64,15 @@ function Instalacion() {
       const token = localStorage.getItem('token');
       let urlFotoFinal = datosInstalacion.foto_domicilio_url;
 
-      // PASO 1: Si hay un archivo seleccionado, lo subimos primero al servidor
       if (fotoArchivo) {
         const formData = new FormData();
-        formData.append('foto', fotoArchivo); // 'foto' es el nombre que espera multer en el backend
+        formData.append('foto', fotoArchivo); 
 
         const uploadRes = await fetch('https://chilacnet-backend.onrender.com/api/upload', {
           method: 'POST',
           headers: {
             'Authorization': `Bearer ${token}`
-            // OJO: No se pone 'Content-Type' cuando usamos FormData, el navegador lo hace solo
+      
           },
           body: formData
         });
@@ -86,11 +81,9 @@ function Instalacion() {
 
         if (!uploadRes.ok) throw new Error(uploadData.error || 'Error al subir la imagen');
         
-        // Guardamos la URL real que nos devolvió el servidor
         urlFotoFinal = uploadData.url;
       }
 
-      // PASO 2: Guardamos los datos de la instalación con la URL de la foto ya incluida
       const datosParaGuardar = {
         ...datosInstalacion,
         foto_domicilio_url: urlFotoFinal
@@ -166,7 +159,6 @@ function Instalacion() {
             </div>
           </div>
 
-          {/* NUEVO: Zona de subida de imagen con vista previa */}
           <div className="border-2 border-dashed border-gray-300 rounded-xl p-6 text-center hover:bg-gray-50 transition-colors">
             <label className="block text-sm font-bold text-gray-700 mb-4">Evidencia Fotográfica (Fachada / Instalación)</label>
             
